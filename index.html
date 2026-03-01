@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ru-RU" data-version="123">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Тест PWA</title>
+
+        <!-- Мета для PWA (минимально) -->
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        <h1>Версия: +<span id="version"></span></h1>
+        <script>
+            const now = new Date();
+            const VERSION = now.getHours() + now.getMinutes();
+            document.getElementById("version").textContent = VERSION;
+        </script>
+        <script>
+            if ("serviceWorker" in navigator) {
+                  navigator.serviceWorker.register('/sw.js?v=' + VERSION);
+            }
+        </script>
+    </body>
+</html>
