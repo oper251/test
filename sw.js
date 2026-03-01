@@ -1,6 +1,6 @@
 const CACHE = 'cache-' + "123";//new URL(location.href).searchParams.get('v');
 self.addEventListener('install', e => e.waitUntil(
-  caches.open(CACHE).then(c => c.addAll(['/', '/icon192.png']))
+  caches.open(CACHE).then(c => c.addAll(['/', 'icon192.png']))
 ));
 self.addEventListener('fetch', e => e.respondWith(
   caches.match(e.request).then(r => r || fetch(e.request))
