@@ -4,7 +4,7 @@
     "start_url": "/test/?from=pwa",
     "display": "standalone",
     "icons": [{
-        "src": "icon192.png",
+        "src": "icon192.png?V=2",
         "sizes": "192x192",
         "type": "image/png"
     }]
