@@ -1,7 +1,7 @@
 {
     "name": "Тест",
     "short_name": "Тест",
-    "start_url": "/?from=pwa",
+    "start_url": "/test/?from=pwa",
     "display": "standalone",
     "icons": [{
         "src": "icon192.png",
