@@ -1,4 +1,4 @@
-const CACHE = 'cache-' + new URL(location.href).searchParams.get('v');
+const CACHE = 'cache-' + "123";//new URL(location.href).searchParams.get('v');
 self.addEventListener('install', e => e.waitUntil(
   caches.open(CACHE).then(c => c.addAll(['/', '/icon192.png']))
 ));
