@@ -23,7 +23,7 @@
                 document.body.insertAdjacentHTML("afterbegin", `<h1 id="myDiv">${VERSION}</h1>`);
             });
             navigator.serviceWorker.addEventListener("message", (event) => {
-                document.getElementById("myDiv").textContent  = event.data.text;
+                document.getElementById("myDiv").textContent += event.data.text;
             });
             
              if ("serviceWorker" in navigator) {
