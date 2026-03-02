@@ -1,8 +1,8 @@
-const CACHE = "20260304";
+const CACHE = "20260307";
 
 
 const BASE = "/test/";
-alert(CACHE);
+console.log(CACHE);
 
 
 self.addEventListener("install", (event) => {
@@ -19,7 +19,7 @@ self.addEventListener("activate", (event) => {
       return Promise.all(
         keys.map((key) => {
           if (key !== CACHE) {
-            alert("Удалили CACHE");
+            console.log("Удалили CACHE");
             return caches.delete(key);
           }
         })
