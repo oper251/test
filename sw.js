@@ -1,9 +1,5 @@
-const CACHE = "20260309-";
-
-
+const CACHE = "20260309--";
 const BASE = "/test/";
-sendMessageToClients(CACHE);
-
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -19,12 +15,14 @@ self.addEventListener("activate", (event) => {
       return Promise.all(
         keys.map((key) => {
           if (key !== CACHE) {
-            console.log("Удалили CACHE");
-            sendMessageToClients('Привет из воркера');
+            console.log("Удалили CACHE: " + key);
             return caches.delete(key);
           }
         })
       );
+    }).then(() => {
+      // Отправляем сообщение ТОЛЬКО после полной активации и удаления старых кэшей
+      sendMessageToClients('Активирована новая версия: ' + CACHE);
     })
   );
 });
@@ -44,5 +42,5 @@ function sendMessageToClients(text) {
         client.postMessage({text: text});
       });
     });
-  }, 2000);
+  }, 1500);
 }
