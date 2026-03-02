@@ -22,12 +22,14 @@ self.addEventListener("activate", (event) => {
         })
       );
     }).then(() => {
-      // Отправляем сообщение после активации
-      self.clients.matchAll().then(clients => {
-        clients.forEach(client => {
-          client.postMessage({text: 'Привет из воркера'});
+      // Задержка, чтобы страница успела подписаться
+      setTimeout(() => {
+        self.clients.matchAll().then(clients => {
+          clients.forEach(client => {
+            client.postMessage({text: 'Привет из воркера'});
+          });
         });
-      });
+      }, 3000);
     })
   );
 });
