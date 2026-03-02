@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru-RU" data-version="!!!">
+<html lang="ru-RU" data-version="456">
     <head>
         <title>Тест PWA</title>
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -22,11 +22,11 @@
                 document.body.insertAdjacentHTML("afterbegin", `<img src="icon192.png" alt="ТЕСТ" />`);
                 document.body.insertAdjacentHTML("afterbegin", `<h1 id="myDiv">${VERSION}</h1>`);
             });
-            navigator.serviceWorker.addEventListener("message", (event) => {
-                document.getElementById("myDiv").textContent += event.data.text;
-            });
-            
-             if ("serviceWorker" in navigator) {
+            //navigator.serviceWorker.addEventListener("message", (event) => {
+            //document.getElementById("myDiv").textContent = event.data.text;
+            //});
+
+            if ("serviceWorker" in navigator) {
                 navigator.serviceWorker
                     .register("sw.js")
                     .then(() => console.log("pwa start"))
@@ -34,9 +34,5 @@
             }
         </script>
     </head>
-    <body>
-        <script>
-           
-        </script>
-    </body>
+    <body></body>
 </html>
