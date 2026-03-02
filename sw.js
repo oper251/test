@@ -1,5 +1,10 @@
-const BASE = "20260303";
+const CACHE = "20260303";
+
+
+const BASE = "/test/";
 alert(CACHE);
+
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE).then((cache) => {
