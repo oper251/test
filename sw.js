@@ -1,4 +1,4 @@
-const CACHE = "20260311";
+const CACHE = "20260312";
 const BASE = "/test/";
 console.log(CACHE);
 
