@@ -1,6 +1,9 @@
-const CACHE = "20260313";
+const CACHE = "20260309-";
+
+
 const BASE = "/test/";
-console.log(CACHE);
+sendMessageToClients(CACHE);
+
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -17,19 +20,11 @@ self.addEventListener("activate", (event) => {
         keys.map((key) => {
           if (key !== CACHE) {
             console.log("Удалили CACHE");
+            sendMessageToClients('Привет из воркера');
             return caches.delete(key);
           }
         })
       );
-    }).then(() => {
-      // Задержка, чтобы страница успела подписаться
-      setTimeout(() => {
-        self.clients.matchAll().then(clients => {
-          clients.forEach(client => {
-            client.postMessage({text: 'Привет из воркера'});
-          });
-        });
-      }, 3000);
     })
   );
 });
@@ -41,3 +36,13 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
+function sendMessageToClients(text) {
+  setTimeout(() => {
+    self.clients.matchAll().then(clients => {
+      clients.forEach(client => {
+        client.postMessage({text: text});
+      });
+    });
+  }, 2000);
+}
