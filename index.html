@@ -9,7 +9,7 @@
         <!--initial-scale=1.0 — начальный масштаб 100%.-->
         <!--maximum-scale=1.0 — запрещает увеличение (масштаб не больше 100%).-->
         <!--user-scalable=no — запрещает пользователю масштабировать страницу жестами.-->
-        <meta name="theme-color" content="#FF0000" />
+        <meta name="theme-color" content="#00" />
         <!--цвет статус-бара — панели уровня заряда, сети и времени + подвал.-->
 
         <!-- Мета для PWA (минимально) -->
@@ -20,18 +20,23 @@
             const VERSION = now.getHours() + "" + now.getMinutes() || document.documentElement.dataset.version;
             document.addEventListener("DOMContentLoaded", function () {
                 document.body.insertAdjacentHTML("afterbegin", `<img src="icon192.png" alt="ТЕСТ" />`);
-                document.body.insertAdjacentHTML("afterbegin", `<h1>${VERSION}</h1>`);
+                document.body.insertAdjacentHTML("afterbegin", `<h1 id="myDiv">${VERSION}</h1>`);
             });
-        </script>
-    </head>
-    <body>
-        <script>
-            if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.addEventListener("message", (event) => {
+                document.getElementById("myDiv").textContent  = event.data.text;
+            });
+            
+             if ("serviceWorker" in navigator) {
                 navigator.serviceWorker
                     .register("sw.js")
                     .then(() => alert("pwa start"))
                     .catch(() => alert("pwa error"));
             }
+        </script>
+    </head>
+    <body>
+        <script>
+           
         </script>
     </body>
 </html>

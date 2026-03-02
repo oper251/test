@@ -8,7 +8,7 @@ console.log(CACHE);
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE).then((cache) => {
-      return cache.addAll([BASE, BASE + "index.html", BASE + "manifest.json", BASE + "icon192.png"]);
+      return cache.addAll([BASE + "index.html", BASE + "manifest.json", BASE + "icon192.png"]);
     })
   );
 });
@@ -34,4 +34,10 @@ self.addEventListener("fetch", (event) => {
       return response || fetch(event.request);
     })
   );
+});
+
+self.clients.matchAll().then(clients => {
+  clients.forEach(client => {
+    client.postMessage({text: 'Привет из воркера'});
+  });
 });
