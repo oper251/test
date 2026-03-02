@@ -1,9 +1,6 @@
-const CACHE = "20260310";
-
-
+const CACHE = "20260311";
 const BASE = "/test/";
 console.log(CACHE);
-
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -24,6 +21,13 @@ self.addEventListener("activate", (event) => {
           }
         })
       );
+    }).then(() => {
+      // Отправляем сообщение после активации
+      self.clients.matchAll().then(clients => {
+        clients.forEach(client => {
+          client.postMessage({text: 'Привет из воркера'});
+        });
+      });
     })
   );
 });
@@ -35,10 +39,3 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
-
-self.clients.matchAll().then(clients => {
-  clients.forEach(client => {
-    client.postMessage({text: 'Привет из воркера'});
-  });
-});
-
