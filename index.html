@@ -29,8 +29,8 @@
              if ("serviceWorker" in navigator) {
                 navigator.serviceWorker
                     .register("sw.js")
-                    .then(() => alert("pwa start"))
-                    .catch(() => alert("pwa error"));
+                    .then(() => console.log("pwa start"))
+                    .catch(() => console.log("pwa error"));
             }
         </script>
     </head>
