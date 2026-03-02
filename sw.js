@@ -1,9 +1,24 @@
-const CACHE = "my-pwa-cache-v6";
-
+const BASE = "20260303";
+alert(CACHE);
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE).then((cache) => {
-      return cache.addAll(["/test/", "/test/index.html", "/test/manifest.json", "/test/icon192.png"]);
+      return cache.addAll([BASE, BASE + "index.html", BASE + "manifest.json", BASE + "icon192.png"]);
+    })
+  );
+});
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE) {
+            alert("Удалили CACHE");
+            return caches.delete(key);
+          }
+        })
+      );
     })
   );
 });
@@ -15,19 +30,3 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
-
-//self.addEventListener('install', () => self.skipWaiting());
-//self.addEventListener('activate', (event) => {
-//    event.waitUntil(clients.claim());
-//});
-//self.addEventListener('fetch', (event) => {
-//    // Не кэшируем HTML
-//    if (event.request.mode === 'navigate') {
-//        event.respondWith(fetch(event.request));
-//        return;
-//    }
-//    // Остальное — как есть
-//    event.respondWith(fetch(event.request));
-//});
-
-

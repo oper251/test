@@ -1,26 +1,36 @@
 <!doctype html>
-<html lang="ru-RU" data-version="123">
+<html lang="ru-RU" data-version="!!!">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#FF0000">
         <title>Тест PWA</title>
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <!--width=device-width — ширина страницы равна ширине экрана.-->
+        <!--initial-scale=1.0 — начальный масштаб 100%.-->
+        <!--maximum-scale=1.0 — запрещает увеличение (масштаб не больше 100%).-->
+        <!--user-scalable=no — запрещает пользователю масштабировать страницу жестами.-->
+        <meta name="theme-color" content="#FF0000" />
+        <!--цвет статус-бара — панели уровня заряда, сети и времени + подвал.-->
 
         <!-- Мета для PWA (минимально) -->
         <link rel="manifest" href="manifest.json" />
-        <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    </head>
-    <body>
-        <h1>Версия: ++<span id="version"></span></h1>
-        <img src="icon192.png" alt="ТЕСТ" />
+
         <script>
             const now = new Date();
-            const VERSION = now.getHours() + now.getMinutes();
-            document.getElementById("version").textContent = VERSION;
+            const VERSION = now.getHours() + "" + now.getMinutes() || document.documentElement.dataset.version;
+            document.addEventListener("DOMContentLoaded", function () {
+                document.body.insertAdjacentHTML("afterbegin", `<img src="icon192.png" alt="ТЕСТ" />`);
+                document.body.insertAdjacentHTML("afterbegin", `<h1>${VERSION}</h1>`);
+            });
         </script>
+    </head>
+    <body>
         <script>
             if ("serviceWorker" in navigator) {
-                  navigator.serviceWorker.register('sw.js');
+                navigator.serviceWorker
+                    .register("sw.js")
+                    .then(() => alert("pwa start"))
+                    .catch(() => alert("pwa error"));
             }
         </script>
     </body>
