@@ -1,4 +1,4 @@
-const CACHE = "20260309";
+const CACHE = "20260310";
 
 
 const BASE = "/test/";
@@ -41,3 +41,4 @@ self.clients.matchAll().then(clients => {
     client.postMessage({text: 'Привет из воркера'});
   });
 });
+
